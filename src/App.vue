@@ -1,47 +1,40 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+const nome = "qjao";
+
+const objeto = {
+  nome: "qejao",
+  filmeFavorito: "star wars",
+};
+
+function dizOla() {
+  return `${nome} diz ola`;
+}
+
+const imagemAvatar =
+  "https://mundoavatar.com.br/wp-content/uploads/2021/07/avatar-filme.jpeg";
+const imagemZuko =
+  "https://cdn.pixabay.com/photo/2021/06/22/14/55/zuko-6356391_1280.jpg";
+
+const gostaAvatar = false;
+const gostaZuko = false;
+
+const estaAutoriazdo = false;
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <h1>{{ dizOla() }}</h1>
+  <img v-if="gostaAvatar" :src="imagemAvatar" />
+  <img v-else-if="gostaZuko" :src="imagemZuko" />
+  <h2 v-else>n gosta de nd</h2>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+  <h1 v-if="estaAutoriazdo">liberado chefia</h1>
+  <h1 v-else>nao tem nd</h1>
 
-  <main>
-    <TheWelcome />
-  </main>
+  <button :disabled="false">enviar mensagem</button>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+img {
+  max-width: 200px;
 }
 </style>
