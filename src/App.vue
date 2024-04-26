@@ -1,4 +1,6 @@
 <script setup>
+import { reactive } from "vue";
+
 const nome = "qjao";
 
 const objeto = {
@@ -19,6 +21,23 @@ const gostaAvatar = false;
 const gostaZuko = false;
 
 const estaAutoriazdo = false;
+
+const estado = reactive({
+  contador: 0,
+  email: "",
+});
+
+function incrementar() {
+  estado.contador++;
+}
+
+function decrementar() {
+  estado.contador--;
+}
+
+function alternaEmail(evento) {
+  estado.email = evento.target.value;
+}
 </script>
 
 <template>
@@ -31,6 +50,20 @@ const estaAutoriazdo = false;
   <h1 v-else>nao tem nd</h1>
 
   <button :disabled="false">enviar mensagem</button>
+
+  <br />
+  <hr />
+
+  {{ estado.contador }}
+
+  <button @click="incrementar" type="button">+</button>
+  <button @click="decrementar" type="button">-</button>
+
+  <br />
+  <hr />
+
+  {{ estado.email }}
+  <input type="email" @keyup="alternaEmail" />
 </template>
 
 <style scoped>
