@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from "vue";
 
-const nome = "qjao";
+const nome = "qejao";
 
 const objeto = {
   nome: "qejao",
@@ -20,11 +20,12 @@ const imagemZuko =
 const gostaAvatar = false;
 const gostaZuko = false;
 
-const estaAutoriazdo = false;
+const estaAutoriazdo = true;
 
 const estado = reactive({
   contador: 0,
   email: "",
+  lorota: "",
 });
 
 function incrementar() {
@@ -37,6 +38,10 @@ function decrementar() {
 
 function alternaEmail(evento) {
   estado.email = evento.target.value;
+}
+
+function lorotou(evento) {
+  estado.lorota = evento.target.value;
 }
 </script>
 
@@ -64,6 +69,8 @@ function alternaEmail(evento) {
 
   {{ estado.email }}
   <input type="email" @keyup="alternaEmail" />
+
+  <input type="number" @keyup="lorotou" />
 </template>
 
 <style scoped>
