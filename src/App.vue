@@ -1,31 +1,26 @@
 <script setup>
-import { reactive } from "vue";
-
-const nome = "qejao";
+import { reactive, computed } from "vue";
 
 const objeto = {
   nome: "qejao",
-  filmeFavorito: "star wars",
+  filmeFavorito: "avatarrr",
 };
-
-function dizOla() {
-  return `${nome} diz ola`;
-}
 
 const imagemAvatar =
   "https://mundoavatar.com.br/wp-content/uploads/2021/07/avatar-filme.jpeg";
 const imagemZuko =
   "https://cdn.pixabay.com/photo/2021/06/22/14/55/zuko-6356391_1280.jpg";
 
-const gostaAvatar = true;
-const gostaZuko = false;
+const gostaAvatar = false;
+const gostaZuko = true;
 
-const estaAutoriazdo = true;
+const estaAutoriazdo = false;
 
 const estado = reactive({
   contador: 0,
-  email: "",
-  lorota: "",
+  palavra: "",
+  teste: "",
+  nome: "",
 });
 
 function incrementar() {
@@ -36,23 +31,30 @@ function decrementar() {
   estado.contador--;
 }
 
-function alternaEmail(evento) {
-  estado.email = evento.target.value;
+//
+
+function inserePalavra(evento) {
+  estado.palavra = evento.target.value;
 }
 
-function lorotou(evento) {
-  estado.lorota = evento.target.value;
+function teste(evento) {
+  estado.teste = evento.target.value;
 }
+
+function alteraNome(evento) {
+  estado.nome = evento.target.value;
+}
+
+const mandaSalve = computed(() => `Salve guerreiro ${estado.nome}`);
 </script>
 
 <template>
-  <h1>{{ dizOla() }}</h1>
   <img v-if="gostaAvatar" :src="imagemAvatar" />
   <img v-else-if="gostaZuko" :src="imagemZuko" />
   <h2 v-else>n gosta de nd</h2>
 
   <h1 v-if="estaAutoriazdo">liberado chefia</h1>
-  <h1 v-else>nao tem nd</h1>
+  <h1 v-else>foi barrado</h1>
 
   <button :disabled="false">enviar mensagem</button>
 
@@ -67,14 +69,23 @@ function lorotou(evento) {
   <br />
   <hr />
 
-  {{ estado.email }}
-  <input type="email" @keyup="alternaEmail" />
+  {{ estado.palavra }}
+  <input type="email" @keyup="inserePalavra" />
 
-  <input type="number" @keyup="lorotou" />
+  {{ estado.teste }}
+  <input type="number" @keyup="teste" />
+
+  {{ mandaSalve }}
+  <input type="text" @keyup="alteraNome" />
 </template>
 
 <style scoped>
 img {
   max-width: 200px;
+}
+
+input {
+  width: 100px;
+  margin: 16px;
 }
 </style>
