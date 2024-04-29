@@ -23,6 +23,8 @@ const estado = reactive({
   nome: "",
   saldo: 5000,
   transferindo: 0,
+  nomes: ["quejao", "ze", "golias"],
+  nomeInserir: "",
 });
 
 function incrementar() {
@@ -57,6 +59,14 @@ function mostraSaldoFuturo() {
 function validaValorTransferencia() {
   const { saldo, transferindo } = estado;
   return saldo >= transferindo;
+}
+
+function cadastraNome() {
+  if (estado.nomeInserir.length >= 3) {
+    estado.nomes.push(estado.nomeInserir);
+  } else {
+    alert("fundiu");
+  }
 }
 </script>
 
@@ -104,6 +114,22 @@ function validaValorTransferencia() {
   />
   <button v-if="validaValorTransferencia()">transferir</button>
   <span v-else>valor maior q o saldo</span>
+
+  <br />
+  <hr />
+
+  <ul>
+    <li v-for="nome in estado.nomes">
+      {{ nome }}
+    </li>
+  </ul>
+
+  <input
+    @keyup="(evento) => (estado.nomeInserir = evento.target.value)"
+    type="text"
+    placeholder="escreva um novo nome"
+  />
+  <button @click="cadastraNome()" type="button">cadastro nome</button>
 </template>
 
 <style scoped>
