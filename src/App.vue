@@ -11,8 +11,8 @@ const imagemAvatar =
 const imagemZuko =
   "https://cdn.pixabay.com/photo/2021/06/22/14/55/zuko-6356391_1280.jpg";
 
-const gostaAvatar = false;
-const gostaZuko = true;
+const gostaAvatar = true;
+const gostaZuko = false;
 
 const estaAutoriazdo = false;
 
