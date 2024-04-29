@@ -21,6 +21,8 @@ const estado = reactive({
   palavra: "",
   teste: "",
   nome: "",
+  saldo: 5000,
+  transferindo: 0,
 });
 
 function incrementar() {
@@ -46,6 +48,16 @@ function alteraNome(evento) {
 }
 
 const mandaSalve = computed(() => `Salve guerreiro ${estado.nome}`);
+
+function mostraSaldoFuturo() {
+  const { saldo, transferindo } = estado;
+  return saldo - transferindo;
+}
+
+function validaValorTransferencia() {
+  const { saldo, transferindo } = estado;
+  return saldo >= transferindo;
+}
 </script>
 
 <template>
@@ -77,15 +89,38 @@ const mandaSalve = computed(() => `Salve guerreiro ${estado.nome}`);
 
   {{ mandaSalve }}
   <input type="text" @keyup="alteraNome" />
+
+  <br />
+  <hr />
+  Saldo: {{ estado.saldo }} <br />
+  Transferindo: {{ estado.transferindo }} <br />
+  Saldo depois da transferencia: {{ mostraSaldoFuturo() }} <br />
+  <input
+    class="campo"
+    :class="{ invalido: !validaValorTransferencia() }"
+    @keyup="(evento) => (estado.transferindo = evento.target.value)"
+    type="number"
+    placeholder="quantia de transferencia"
+  />
+  <button v-if="validaValorTransferencia()">transferir</button>
+  <span v-else>valor maior q o saldo</span>
 </template>
 
 <style scoped>
+.invalido {
+  outline-color: red;
+  border-color: red;
+}
+
 img {
   max-width: 200px;
 }
 
 input {
-  width: 100px;
-  margin: 16px;
+  width: 160px;
+}
+
+.campo {
+  border: 2px solid green;
 }
 </style>
